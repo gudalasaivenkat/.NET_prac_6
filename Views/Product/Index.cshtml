@@ -1,0 +1,39 @@
+@model IEnumerable<ProductCatalog.Models.Product>
+
+@{
+    ViewBag.Title = "Product Catalog";
+}
+
+<h2>Product Catalog</h2>
+
+<p>
+    @Html.ActionLink("Add New Product", "Create", "Product",
+        null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Category</td>
+            <td>₹@item.Price.ToString("N2")</td>
+            <td>
+                @Html.ActionLink("Details", "Details",
+                    new { id = item.Id })
+                |
+                @Html.ActionLink("Delete", "Delete",
+                    new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
